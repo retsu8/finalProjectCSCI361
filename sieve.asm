@@ -11,11 +11,15 @@ main:	li	$s0, 0x00000000	# initialize $s0 with zeros
 
 	add	$s2, $sp, 0	# backup bottom of stack address in $s2
 
-	li	$t0, 2		# set counter variable to 2
+	li	$t0, 3		# set counter variable to 3
+
+	sw 	$s1, ($sp)	# write ones to the stackpointer's address
+	sub	$sp, $sp, 4	# subtract 4 bytes from stackpointer
+	sw	$s1, ($sp)	# write ones to the stackpointer's address
 
 init:	sw	$s1, ($sp)	# write ones to the stackpointer's address
-	add	$t0, $t0, 1	# increment counter variable
-	sub	$sp, $sp, 4	# subtract 4 bytes from stackpointer (push)
+	add	$t0, $t0, 2	# increment counter variable
+	sub	$sp, $sp, 8	# subtract 4 bytes from stackpointer (push)
 	ble	$t0, $t9, init	# take loop while $t0 <= $t9
 
 	li	$t0, 1		# reset counter variable to 1
