@@ -13,8 +13,9 @@ main:	li	$s0, 0x00000000	# initialize $s0 with zeros
 
 	li	$t0, 3		# set counter variable to 3
 
+	beq	$s1, ($sp) skip0#skip if stackpointers address is already ones
 	sw 	$s1, ($sp)	# write ones to the stackpointer's address
-	sub	$sp, $sp, 4	# subtract 4 bytes from stackpointer
+skip0:	sub	$sp, $sp, 4	# subtract 4 bytes from stackpointer
 	sw	$s1, ($sp)	# write ones to the stackpointer's address
 
 init:	sw	$s1, ($sp)	# write ones to the stackpointer's address
