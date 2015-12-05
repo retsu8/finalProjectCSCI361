@@ -9,17 +9,17 @@ main:	li	$s0, 0x00000000	# initialize $s0 with zeros
 	li	$s1, 0x11111111	# initialize $s1 with ones
 	li	$t9, 200	# find prime numbers from 2 to $t9
 
-	add	$s2, $sp, 0	# backup bottom of stack address in $s2
+	move	$s2, $sp	# backup bottom of stack address in $s2
 
 	li	$t0, 3		# set counter variable to 3
 
-	beq	$s1, ($sp) skip0#skip if stackpointers address is already ones
+	beq	$s1, $sp, skip0	#skip if stackpointers address is already set
 	sw 	$s1, ($sp)	# write ones to the stackpointer's address
 skip0:	sub	$sp, $sp, 4	# subtract 4 bytes from stackpointer
 	sw	$s1, ($sp)	# write ones to the stackpointer's address
 
 init:	sw	$s1, ($sp)	# write ones to the stackpointer's address
-	add	$t0, $t0, 2	# increment counter variable
+	add	$t0, $t0, 4	# increment counter variable
 	sub	$sp, $sp, 8	# subtract 4 bytes from stackpointer (push)
 	ble	$t0, $t9, init	# take loop while $t0 <= $t9
 
